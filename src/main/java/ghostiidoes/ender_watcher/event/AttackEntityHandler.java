@@ -47,7 +47,7 @@ public class AttackEntityHandler implements AttackEntityCallback {
 
             boolean shouldSpawn = false;
 
-            Box box = entity.getBoundingBox().expand(10);
+            Box box = entity.getBoundingBox().expand(32);
             List<WatcherEntity> watchersNearby = entity.getWorld().getEntitiesByType(ModEntities.ENDER_WATCHER, box, EntityPredicates.VALID_ENTITY);
 
             if (player.isCreative() || player.isSpectator()) {
@@ -55,11 +55,12 @@ public class AttackEntityHandler implements AttackEntityCallback {
             }
 
             if (watchersNearby.size() == 0) {
-                if (random.nextInt(3) == 0) {
+                if (random.nextInt(50) == 0) {
                     shouldSpawn = true;
                 }
             }
             else {
+                shouldSpawn = false;
                 for (int i = watchersNearby.size(); i > 0; i--) {
                     watchersNearby.get(i-1).setTarget(player);
                 }
