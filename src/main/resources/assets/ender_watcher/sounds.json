@@ -1,0 +1,20 @@
+{
+  "watcher_place": {
+    "subtitle": "sounds.ender_watcher.place",
+    "sounds": [
+      "ender_watcher:place"
+    ]
+  },
+  "watcher_break": {
+    "subtitle": "sounds.ender_watcher.break",
+    "sounds": [
+      "ender_watcher:break"
+    ]
+  },
+  "watcher_stare": {
+    "subtitle": "sounds.ender_watcher.stare",
+    "sounds": [
+      "ender_watcher:stare"
+    ]
+  }
+}

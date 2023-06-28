@@ -28,7 +28,7 @@ public class WatcherModel extends GeoModel<WatcherEntity> {
 
     @Override
     public void setCustomAnimations(WatcherEntity animatable, long instanceId, AnimationState<WatcherEntity> animationState) {
-        CoreGeoBone head = getAnimationProcessor().getBone("headwear");
+        CoreGeoBone head = getAnimationProcessor().getBone("head");
 
         if (head != null) {
             EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);

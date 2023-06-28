@@ -1,3 +1,7 @@
 {
-  "item.ender_watcher.void_eye": "Void Eye"
+  "item.ender_watcher.void_eye": "Void Eye",
+  "item.ender_watcher.ender_watcher_spawn_egg": "Ender Watcher Spawn Egg",
+  "sounds.ender_watcher.place": "Ender Watcher Places Block",
+  "sounds.ender_watcher.break": "Ender Watcher Picks Block",
+  "sounds.ender_watcher.stare": "Ender Watcher Stare"
 }

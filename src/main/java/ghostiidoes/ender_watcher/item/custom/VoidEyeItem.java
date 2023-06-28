@@ -1,6 +1,6 @@
 package ghostiidoes.ender_watcher.item.custom;
 
-import ghostiidoes.ender_watcher.world.ModStructureTags;
+import ghostiidoes.ender_watcher.world.ModTags;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EyeOfEnderEntity;
@@ -37,7 +37,7 @@ public class VoidEyeItem extends Item {
             user.setCurrentHand(hand);
             if (world instanceof ServerWorld) {
                 ServerWorld serverWorld = (ServerWorld) world;
-                BlockPos blockPos = serverWorld.locateStructure(ModStructureTags.VOID_EYE_LOCATED, user.getBlockPos(), 100, false);
+                BlockPos blockPos = serverWorld.locateStructure(ModTags.VOID_EYE_LOCATED, user.getBlockPos(), 100, false);
                 if (blockPos != null) {
                     EyeOfEnderEntity eyeOfEnderEntity = new EyeOfEnderEntity(world, user.getX(), user.getBodyY(0.5), user.getZ());
                     eyeOfEnderEntity.setItem(itemStack);
