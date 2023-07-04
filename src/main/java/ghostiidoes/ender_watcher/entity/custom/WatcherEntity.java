@@ -1,5 +1,7 @@
 package ghostiidoes.ender_watcher.entity.custom;
 
+import ghostiidoes.ender_watcher.EnderWatcherMod;
+import ghostiidoes.ender_watcher.entity.ModEntities;
 import ghostiidoes.ender_watcher.sounds.ModSounds;
 import ghostiidoes.ender_watcher.world.ModTags;
 import net.minecraft.block.Block;
@@ -27,11 +29,13 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.TimeHelper;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.*;
@@ -78,7 +82,7 @@ public class WatcherEntity extends HostileEntity implements Angerable, GeoEntity
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 80.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 7.0)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 9.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64.0);
     }
 
@@ -145,6 +149,21 @@ public class WatcherEntity extends HostileEntity implements Angerable, GeoEntity
         if (attacked && target instanceof LivingEntity) {
             // teleport with target
             if (this.random.nextInt(10) > (this.getHealth() / 8)) {
+                Box box = this.getBoundingBox().expand(32);
+                List<EndermanEntity> nearbyEndermen = this.getWorld().getEntitiesByType(EntityType.ENDERMAN, box, EntityPredicates.VALID_ENTITY);
+                EnderWatcherMod.LOGGER.info("Nearby endermen are " + nearbyEndermen);
+
+                // anger random nearby enderman
+                if (nearbyEndermen.size() > 1) {
+                    int randomNumber = this.random.nextInt(nearbyEndermen.size() - 1);
+                    nearbyEndermen.get(randomNumber).setTarget((LivingEntity) target);
+                    EnderWatcherMod.LOGGER.info("Size was greater than 1");
+                }
+                else if (nearbyEndermen.size() == 1) {
+                    nearbyEndermen.get(0).setTarget((LivingEntity) target);
+                    EnderWatcherMod.LOGGER.info("Size was 1");
+                }
+
                 ((LivingEntity)target).addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 20), this);
                 for (int i = 0; i < 32; ++i) {
                     if (!this.teleportWithTarget(target)) continue;
